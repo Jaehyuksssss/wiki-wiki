@@ -2,12 +2,17 @@ import { clickedButton } from "@src/components/recoil/HomeStore";
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-
+import { API, graphqlOperation } from "aws-amplify";
+import { createLectures } from "@src/graphql/mutations";
 export default function AddModal() {
   const [openModal, setOpenModal] = useRecoilState(clickedButton);
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  const handleCreateLecture = () => {
+    const requst = API.graphql(graphqlOperation(createLectures));
   };
 
   return (
