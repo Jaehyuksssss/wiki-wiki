@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-wikiwiki-dev-00854-authRole",
+      "UnauthRoleArn": "arn:aws:iam::985054856300:role/amplify-wikiwiki-dev-00854-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::985054856300:role/amplify-wikiwiki-dev-00854-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-wikiwiki-dev-00854-deployment",
+      "UnauthRoleName": "amplify-wikiwiki-dev-00854-unauthRole",
+      "StackName": "amplify-wikiwiki-dev-00854",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:985054856300:stack/amplify-wikiwiki-dev-00854/ca3065c0-cf0c-11ed-9a96-0aa344a18aa0",
+      "AmplifyAppId": "difvzzu8vgwoi"
+    }
+  }
+}
