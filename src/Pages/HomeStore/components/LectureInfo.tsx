@@ -1,9 +1,12 @@
+import AddModal from '@src/components/atoms/Modal/AddModal'
+import { clickedButton } from '@src/components/recoil/HomeStore'
 import React from 'react'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
-import LectureContents from './LectureContents'
 import LectureSubject from './LectureSubject'
 
 export default function LectureInfo() {
+  const [openModal, setOpenModal] = useRecoilState(clickedButton)
   return (
     <Container>
       <ContentsWrapper>

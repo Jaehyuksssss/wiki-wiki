@@ -1,32 +1,55 @@
-// import { LectureParmas } from '@src/components/constant'
 import { LectureDetail } from '@src/components/constant'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import { useRecoilState } from 'recoil'
+import { clickedButton } from '@src/components/recoil/HomeStore'
 
+interface PostData {
+  userId: number
+  id: number
+  title: string
+  body: string
+}
 export default function LectureTitle() {
+  const [openModal, setOpenModal] = useRecoilState(clickedButton)
+
+  const HandleModal = () => {
+    setOpenModal(!openModal)
+    console.log(openModal)
+  }
   return (
-    <Table>
-      <thead>
-        <Tr>
-          <Th>ID</Th>
-          <Th>Title</Th>
-          <Th>Period</Th>
-          <Th>Price</Th>
-          <Th>Date</Th>
-        </Tr>
-      </thead>
-      <tbody>
-        {LectureDetail.map((lecture) => (
-          <Tr key={lecture.id}>
-            <Td>{lecture.id}</Td>
-            <Td>{lecture.title}</Td>
-            <Td>{lecture.period}</Td>
-            <Td>{lecture.price}</Td>
-            <Td>{lecture.date}</Td>
+    <div>
+      <Table>
+        <thead>
+          <Tr>
+            <Th>ID</Th>
+            <Th>Title</Th>
+            <Th>Period</Th>
+            <Th>Price</Th>
+            <Th>Date</Th>
+            <Th>
+              <ButtonBox>
+                <button onClick={HandleModal}>
+                  <Span>+</Span>
+                </button>
+              </ButtonBox>
+            </Th>
           </Tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {LectureDetail.map((lecture) => (
+            <Tr key={lecture.id}>
+              <Td>{lecture.id}</Td>
+              <Td>{lecture.title}</Td>
+              <Td>{lecture.period}</Td>
+              <Td>{lecture.price}</Td>
+              <Td>{lecture.date}</Td>
+            </Tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   )
 }
 
@@ -40,15 +63,25 @@ const Th = styled.th`
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  cursor: pointer;
 `
 
 const Tr = styled.tr`
   &:nth-child(even) {
     background-color: #f2f2f2;
   }
+  cursor: pointer;
 `
 
 const Td = styled.td`
   border: 1px solid #ddd;
   padding: 8px;
+  cursor: pointer;
+`
+const Span = styled.span`
+  font-size: 20px;
+`
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
 `

@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-export const clickedTitle = atom({
+export const clickedButton = atom({
   key: 'ClickTitle',
   default: false,
 })

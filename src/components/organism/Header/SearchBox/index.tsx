@@ -1,4 +1,3 @@
-import { func } from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -7,7 +6,12 @@ export default function SearchBox() {
     <Container>
       <SearchBoxWrapper>
         <Span>Search Information</Span>
-        <Input />
+        <InputWrapper>
+          <Input />
+          <SearchIconWrapper>
+            <SearchIcon src="public/Images/search.png" alt="" />
+          </SearchIconWrapper>
+        </InputWrapper>
       </SearchBoxWrapper>
     </Container>
   )
@@ -33,9 +37,27 @@ const Span = styled.span`
   font-size: 25px;
 `
 
+const InputWrapper = styled.div`
+  position: relative;
+`
+
 const Input = styled.input`
   background-color: white;
   width: 350px;
   height: 35px;
   border-radius: 50px;
+  padding-left: 30px;
+`
+
+const SearchIconWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+`
+
+const SearchIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 `
