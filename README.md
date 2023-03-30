@@ -23,10 +23,6 @@
 
 - React.js , typeScript , styled-components , webpack , babel
 
-## 데이터
-
-- 목데이터
-
 ## 디자인
 
 - 다크 모드와 라이트 모드를 지원합니다.
