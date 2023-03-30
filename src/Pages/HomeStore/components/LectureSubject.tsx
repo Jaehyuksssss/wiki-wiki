@@ -29,8 +29,8 @@ export default function LectureTitle() {
             <Th>Price</Th>
             <Th>Date</Th>
             <Th>
-              <ButtonBox>
-                <button onClick={HandleModal}>
+              <ButtonBox onClick={HandleModal}>
+                <button >
                   <Span>+</Span>
                 </button>
               </ButtonBox>

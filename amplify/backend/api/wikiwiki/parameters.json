@@ -1,5 +1,0 @@
-{
-  "AppSyncApiName": "wikiwiki",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
-}
