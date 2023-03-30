@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "wikiwiki",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-03-30T15:46:09.244Z"
 }

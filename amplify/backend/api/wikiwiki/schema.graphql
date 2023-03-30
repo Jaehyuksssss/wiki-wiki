@@ -3,12 +3,13 @@
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 
 type Lectures @model {
-    id ID!
-    title String!
-    content String!
-    period Int!
-    currency_code String!
-    price Float!
-    date Int!
+    id: ID! @primaryKey
+    title: String!
+    content: String!
+    period: Int!
+    currency_code: String!
+    price: Float!
+    created_at : Int
+    updated_at : Int
 }
 

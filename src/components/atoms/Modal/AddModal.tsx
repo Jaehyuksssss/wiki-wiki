@@ -17,6 +17,8 @@ export default function AddModal() {
       </CloseButton>
       <TitleInput placeholder="Title" />
       <ContentInput placeholder="Content" />
+      <TitleInput placeholder="Period" />
+      <TitleInput placeholder="Price" />
       <Button>SUBMIT</Button>
     </ModalContainer>
   );
