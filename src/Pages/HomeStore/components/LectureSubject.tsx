@@ -1,91 +1,74 @@
-import { LectureDetail } from '@src/components/constant'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { useRecoilState } from 'recoil'
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 import {
   clickedButton,
   lectureList,
   parseLectureData,
-} from '@src/components/recoil/HomeStore'
+} from "@src/components/recoil/HomeStore";
 import {
   GraphQLQuery,
   GraphQLResult,
   GraphQLSubscription,
-} from '@aws-amplify/api'
-import { API, graphqlOperation } from 'aws-amplify'
-import { ListLecturesQuery, OnCreateLecturesSubscription } from '@src/API'
-import { onCreateLectures } from '@src/graphql/subscriptions'
-import { listLectures } from '@src/graphql/queries'
+} from "@aws-amplify/api";
+import { API, graphqlOperation } from "aws-amplify";
+import { ListLecturesQuery, OnCreateLecturesSubscription } from "@src/API";
+import { onCreateLectures } from "@src/graphql/subscriptions";
+import { listLectures } from "@src/graphql/queries";
+import { LectureDetail } from "@src/components/interfaces";
+import { Pagination } from "./Pagination";
 
-interface LectureDetail {
-  id: string
-  title: string
-  period: string
-  price: number
-  date: string
-  items: []
-}
 export default function LectureTitle() {
-  const [openModal, setOpenModal] = useRecoilState(clickedButton)
-  const [parseData, setparseData] = useRecoilState<LectureDetail[]>(
-    parseLectureData,
-  )
-  console.log(parseData)
-  const [lectureListData, setLectureListData] = useRecoilState(lectureList)
+  const [openModal, setOpenModal] = useRecoilState(clickedButton);
+  const [parseData, setparseData] = useRecoilState(parseLectureData);
+  const [lectureListData, setLectureListData] = useRecoilState(lectureList);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lecturesPerPage, setLecturesPerPage] = useState(5);
+  console.log(parseData);
   const HandleModal = () => {
-    setOpenModal(!openModal)
-    console.log(openModal)
-    console.log(parseData)
-  }
+    setOpenModal(!openModal);
+  };
+
   const fetchAllLectures = async () => {
     try {
-      const response: GraphQLResult<any> = await API.graphql(
-        graphqlOperation(listLectures),
-      )
-      setparseData(response.data.listLectures)
+      const response = (await API.graphql(
+        graphqlOperation(listLectures)
+      )) as GraphQLResult<{ listLectures: LectureDetail }>;
+
+      const listLecture = response.data?.listLectures;
+      setparseData(listLecture ? listLecture : {});
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
+
   useEffect(() => {
-    fetchAllLectures()
-  }, [])
-  console.log(parseData)
-  // const sub = API.graphql<GraphQLSubscription<OnCreateLecturesSubscription>>(
-  //   graphqlOperation(onCreateLectures),
-  // ).subscribe({
-  //   next: (payload) => {
-  //     const onCreateLectures = payload.value.data?.onCreateLectures
-  //     console.log(onCreateLectures)
-  //     setLectures(
-  //       (prevLectures) => [...prevLectures, onCreateLectures] as never[],
-  //     )
-  //   },
-  // })
-
-  // sub.unsubscribe()
-
-  // useEffect(() => {
-  //   const subscription = API.graphql<
-  //     GraphQLSubscription<OnCreateLecturesSubscription>
-  //   >(graphqlOperation(onCreateLectures)).subscribe({
-  //     next: (payload) => {
-  //       const onCreateLectures = payload.value.data?.onCreateLectures
-  //       console.log(onCreateLectures)
-  //     },
-  //   })
-  //   return () => subscription.unsubscribe()
-  // }, [sub])
+    fetchAllLectures();
+  }, []);
 
   const fetchLectures = async () => {
-    const request: GraphQLResult<any> = await API.graphql(
-      graphqlOperation(listLectures),
-    )
-    setparseData(request.data.listTweets)
-  }
+    const request = (await API.graphql(
+      graphqlOperation(listLectures)
+    )) as GraphQLResult<{ listLectures: LectureDetail }>;
+    const listLecture = request.data?.listLectures;
+    setparseData(listLecture ? listLecture : {});
+  };
+
   useEffect(() => {
-    fetchLectures()
-  }, [])
+    fetchLectures();
+  }, []);
+
+  // Get current lectures
+  const indexOfLastLecture = currentPage * lecturesPerPage;
+  const indexOfFirstLecture = indexOfLastLecture - lecturesPerPage;
+  const currentLectures = parseData?.items?.slice(
+    indexOfFirstLecture,
+    indexOfLastLecture
+  );
+
+  // Change page
+  const paginate = (pageNumber: React.SetStateAction<number>) =>
+    setCurrentPage(pageNumber);
   return (
     <div>
       <Table>
@@ -106,7 +89,7 @@ export default function LectureTitle() {
           </Tr>
         </thead>
         <tbody>
-          {parseData?.items?.map((lecture: any) => (
+          {currentLectures?.map((lecture) => (
             <Tr key={lecture.id}>
               <Td>{lecture.id}</Td>
               <Td>{lecture.title}</Td>
@@ -117,14 +100,20 @@ export default function LectureTitle() {
           ))}
         </tbody>
       </Table>
+      <Pagination
+        lecturesPerPage={lecturesPerPage}
+        totalLectures={parseData?.items ? parseData.items.length : 0}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
-  )
+  );
 }
 
 const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
-`
+`;
 
 const Th = styled.th`
   background-color: #f2f2f2;
@@ -132,24 +121,24 @@ const Th = styled.th`
   padding: 8px;
   text-align: left;
   cursor: pointer;
-`
+`;
 
 const Tr = styled.tr`
   &:nth-child(even) {
     background-color: #f2f2f2;
   }
   cursor: pointer;
-`
+`;
 
 const Td = styled.td`
   border: 1px solid #ddd;
   padding: 8px;
   cursor: pointer;
-`
+`;
 const Span = styled.span`
   font-size: 20px;
-`
+`;
 const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
