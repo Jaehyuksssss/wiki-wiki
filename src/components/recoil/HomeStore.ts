@@ -9,3 +9,8 @@ export const lectureList = atom<any[]>({
   key: 'lectureList',
   default: [],
 })
+
+export const parseLectureData = atom<any[]>({
+  key: 'lectureData',
+  default: [],
+})

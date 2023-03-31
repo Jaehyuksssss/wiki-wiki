@@ -2,50 +2,90 @@ import { LectureDetail } from '@src/components/constant'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
-import { clickedButton, lectureList } from '@src/components/recoil/HomeStore'
-import { GraphQLSubscription } from '@aws-amplify/api'
+import {
+  clickedButton,
+  lectureList,
+  parseLectureData,
+} from '@src/components/recoil/HomeStore'
+import {
+  GraphQLQuery,
+  GraphQLResult,
+  GraphQLSubscription,
+} from '@aws-amplify/api'
 import { API, graphqlOperation } from 'aws-amplify'
-import { OnCreateLecturesSubscription } from '@src/API'
+import { ListLecturesQuery, OnCreateLecturesSubscription } from '@src/API'
 import { onCreateLectures } from '@src/graphql/subscriptions'
 import { listLectures } from '@src/graphql/queries'
 
+interface LectureDetail {
+  id: string
+  title: string
+  period: string
+  price: number
+  date: string
+  items: []
+}
 export default function LectureTitle() {
   const [openModal, setOpenModal] = useRecoilState(clickedButton)
-  const [lectures, setLectures] = useState([])
-  console.log(lectures)
+  const [parseData, setparseData] = useRecoilState<LectureDetail[]>(
+    parseLectureData,
+  )
+  console.log(parseData)
   const [lectureListData, setLectureListData] = useRecoilState(lectureList)
   const HandleModal = () => {
     setOpenModal(!openModal)
     console.log(openModal)
-    console.log(lectures)
+    console.log(parseData)
   }
-
-  const sub = API.graphql<GraphQLSubscription<OnCreateLecturesSubscription>>(
-    graphqlOperation(onCreateLectures),
-  ).subscribe({
-    next: (payload) => {
-      const onCreateLectures = payload.value.data?.onCreateLectures
-      console.log(onCreateLectures)
-      setLectures(
-        (prevLectures) => [...prevLectures, onCreateLectures] as never[],
+  const fetchAllLectures = async () => {
+    try {
+      const response: GraphQLResult<any> = await API.graphql(
+        graphqlOperation(listLectures),
       )
-    },
-  })
-
-  sub.unsubscribe()
-
+      setparseData(response.data.listLectures)
+    } catch (error) {
+      console.error(error)
+    }
+  }
   useEffect(() => {
-    const subscription = API.graphql<
-      GraphQLSubscription<OnCreateLecturesSubscription>
-    >(graphqlOperation(onCreateLectures)).subscribe({
-      next: (payload) => {
-        const onCreateLectures = payload.value.data?.onCreateLectures
-        console.log(onCreateLectures)
-      },
-    })
-    return () => subscription.unsubscribe()
-  }, [sub])
+    fetchAllLectures()
+  }, [])
+  console.log(parseData)
+  // const sub = API.graphql<GraphQLSubscription<OnCreateLecturesSubscription>>(
+  //   graphqlOperation(onCreateLectures),
+  // ).subscribe({
+  //   next: (payload) => {
+  //     const onCreateLectures = payload.value.data?.onCreateLectures
+  //     console.log(onCreateLectures)
+  //     setLectures(
+  //       (prevLectures) => [...prevLectures, onCreateLectures] as never[],
+  //     )
+  //   },
+  // })
 
+  // sub.unsubscribe()
+
+  // useEffect(() => {
+  //   const subscription = API.graphql<
+  //     GraphQLSubscription<OnCreateLecturesSubscription>
+  //   >(graphqlOperation(onCreateLectures)).subscribe({
+  //     next: (payload) => {
+  //       const onCreateLectures = payload.value.data?.onCreateLectures
+  //       console.log(onCreateLectures)
+  //     },
+  //   })
+  //   return () => subscription.unsubscribe()
+  // }, [sub])
+
+  const fetchLectures = async () => {
+    const request: GraphQLResult<any> = await API.graphql(
+      graphqlOperation(listLectures),
+    )
+    setparseData(request.data.listTweets)
+  }
+  useEffect(() => {
+    fetchLectures()
+  }, [])
   return (
     <div>
       <Table>
@@ -66,7 +106,7 @@ export default function LectureTitle() {
           </Tr>
         </thead>
         <tbody>
-          {lectureListData.map((lecture) => (
+          {parseData?.items?.map((lecture: any) => (
             <Tr key={lecture.id}>
               <Td>{lecture.id}</Td>
               <Td>{lecture.title}</Td>
