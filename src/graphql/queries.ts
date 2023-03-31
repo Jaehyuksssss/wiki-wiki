@@ -11,8 +11,6 @@ export const getLectures = /* GraphQL */ `
       period
       currency_code
       price
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -40,8 +38,6 @@ export const listLectures = /* GraphQL */ `
         period
         currency_code
         price
-        created_at
-        updated_at
         createdAt
         updatedAt
       }

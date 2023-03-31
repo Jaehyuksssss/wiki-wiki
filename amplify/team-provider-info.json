@@ -1,15 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-wikiwiki-dev-00854-authRole",
-      "UnauthRoleArn": "arn:aws:iam::985054856300:role/amplify-wikiwiki-dev-00854-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::985054856300:role/amplify-wikiwiki-dev-00854-authRole",
-      "Region": "ap-northeast-2",
-      "DeploymentBucketName": "amplify-wikiwiki-dev-00854-deployment",
-      "UnauthRoleName": "amplify-wikiwiki-dev-00854-unauthRole",
-      "StackName": "amplify-wikiwiki-dev-00854",
-      "StackId": "arn:aws:cloudformation:ap-northeast-2:985054856300:stack/amplify-wikiwiki-dev-00854/ca3065c0-cf0c-11ed-9a96-0aa344a18aa0",
-      "AmplifyAppId": "difvzzu8vgwoi"
+      "AuthRoleName": "amplify-wikiwiki-dev-150814-authRole",
+      "UnauthRoleArn": "arn:aws:iam::985054856300:role/amplify-wikiwiki-dev-150814-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::985054856300:role/amplify-wikiwiki-dev-150814-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-wikiwiki-dev-150814-deployment",
+      "UnauthRoleName": "amplify-wikiwiki-dev-150814-unauthRole",
+      "StackName": "amplify-wikiwiki-dev-150814",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:985054856300:stack/amplify-wikiwiki-dev-150814/6e492fc0-cf8a-11ed-b47b-064f178b9614",
+      "AmplifyAppId": "d3m30bh076dtlc"
     },
     "categories": {
       "api": {

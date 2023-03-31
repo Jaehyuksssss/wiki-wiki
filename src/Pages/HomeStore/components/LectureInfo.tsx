@@ -1,12 +1,18 @@
 import AddModal from '@src/components/atoms/Modal/AddModal'
 import { clickedButton } from '@src/components/recoil/HomeStore'
-import React from 'react'
+import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import LectureSubject from './LectureSubject'
+import ReactPaginate from 'react-paginate'
 
 export default function LectureInfo() {
   const [openModal, setOpenModal] = useRecoilState(clickedButton)
+  const [pageNumber, setPageNumber] = useState(0)
+
+  const itemsPerPage = 5
+  // const pageCount = Math.ceil(items.length / itemsPerPage)
+
   return (
     <Container>
       <ContentsWrapper>
