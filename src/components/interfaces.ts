@@ -1,4 +1,4 @@
-interface LectureItem {
+export interface LectureItem {
     id: string;
     title: string;
     period: string;
@@ -17,4 +17,8 @@ export interface createLectureItem {
     period: number;
     price: number;
     currency_code: string,
+}
+
+export interface createLectureItemParams {
+    items: createLectureItem[];
 }

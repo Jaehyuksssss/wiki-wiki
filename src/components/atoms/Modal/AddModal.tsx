@@ -1,5 +1,5 @@
 import { clickedButton, lectureList } from "@src/components/recoil/HomeStore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { API, graphqlOperation } from "aws-amplify";
@@ -15,7 +15,6 @@ export default function AddModal() {
     price: 0,
     currency_code: "KRW",
   });
-  console.log(lectureListData);
 
   const handleListData = () => {
     setLectureListData((prevState) => [...prevState, lectureInput]);
@@ -40,6 +39,7 @@ export default function AddModal() {
       );
       handleListData();
       handleCloseModal();
+      window.location.reload();
     } catch (error) {
       console.log("error creating lecture: ", error);
     }

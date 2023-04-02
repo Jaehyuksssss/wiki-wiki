@@ -15,7 +15,7 @@ export const Pagination = ({
   currentPage,
 }: PaginationProps) => {
   const pageNumbers = [];
-  console.log(totalLectures, lecturesPerPage);
+
   for (let i = 1; i <= Math.ceil(totalLectures / lecturesPerPage); i++) {
     pageNumbers.push(i);
   }

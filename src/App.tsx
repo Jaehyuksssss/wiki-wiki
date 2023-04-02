@@ -1,10 +1,9 @@
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement, useEffect } from "react";
 
-import { RecoilRoot } from 'recoil'
-import GlobalStyle from './styles/globalStyles'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import HomeStore from './Pages/HomeStore'
-import DetailStore from './Pages/DetailStore'
+import { RecoilRoot } from "recoil";
+import GlobalStyle from "./styles/globalStyles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomeStore from "./Pages/HomeStore";
 
 interface Props {}
 
@@ -15,10 +14,9 @@ function App({}: Props): ReactElement {
       <BrowserRouter>
         <Routes>
           <Route element={<HomeStore />} path="/" />
-          <Route element={<DetailStore />} path="/detail" />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
-  )
+  );
 }
-export default App
+export default App;
