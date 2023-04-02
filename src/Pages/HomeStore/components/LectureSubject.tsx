@@ -21,7 +21,6 @@ import { Pagination } from "./Pagination";
 export default function LectureTitle() {
   const [openModal, setOpenModal] = useRecoilState(clickedButton);
   const [parseData, setparseData] = useRecoilState(parseLectureData);
-  const [lectureListData, setLectureListData] = useRecoilState(lectureList);
   const [currentPage, setCurrentPage] = useState(1);
   const [lecturesPerPage, setLecturesPerPage] = useState(5);
   console.log(parseData);
@@ -42,10 +41,6 @@ export default function LectureTitle() {
     }
   };
 
-  useEffect(() => {
-    fetchAllLectures();
-  }, []);
-
   const fetchLectures = async () => {
     const request = (await API.graphql(
       graphqlOperation(listLectures)
@@ -55,6 +50,7 @@ export default function LectureTitle() {
   };
 
   useEffect(() => {
+    fetchAllLectures();
     fetchLectures();
   }, []);
 
