@@ -4,7 +4,9 @@ export interface LectureItem {
     period: string;
     price: number;
     date: string;
-
+    content: string;
+    createdAt:string;
+    updatedAt:string;
 }
 export interface LectureDetail {
     items: LectureItem[];

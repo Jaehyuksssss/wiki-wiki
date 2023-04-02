@@ -28,7 +28,7 @@ export default function HomeStore() {
     indexOfFirstLecture,
     indexOfLastLecture
   );
-  console.log(detailModal);
+
   // Change page
   const paginate = (pageNumber: React.SetStateAction<number>) =>
     setCurrentPage(pageNumber);

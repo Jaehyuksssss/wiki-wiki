@@ -76,11 +76,12 @@ export default function LectureInfo({ currentLectures }: LectureInfoProps) {
   const HandleModal = () => {
     setOpenModal(!openModal);
   };
+  // Handle Detail modal
   const HandleDetailModal = (lecture: any) => {
     setDetailModal(!detailModal);
     setSelectedLecture(parseInt(lecture.id, 10));
   };
-  console.log(selectedLecture);
+
   return (
     <Container>
       <ContentsWrapper>

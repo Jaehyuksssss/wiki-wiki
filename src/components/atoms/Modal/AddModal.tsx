@@ -15,9 +15,11 @@ export default function AddModal() {
     price: 0,
     currency_code: "KRW",
   });
-
+  console.log(lectureListData);
   const handleListData = () => {
-    setLectureListData((prevState) => [...prevState, lectureInput]);
+    setLectureListData((prevState) =>
+      prevState ? [...prevState, lectureInput] : [lectureInput]
+    );
   };
   const handleCloseModal = () => {
     setOpenModal(false);

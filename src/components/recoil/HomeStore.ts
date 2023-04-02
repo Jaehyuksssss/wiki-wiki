@@ -14,7 +14,7 @@ export const lectureList = atom< Partial<createLectureItem>[]>({
   default: [],
 })
 export const lectureSelected= atom({
-  key: 'lectureList',
+  key: 'lectureListNumber',
   default: 0,
 })
 
