@@ -19,7 +19,7 @@
 - 메인 페이지에서 추가 버튼을 누르면 새로이 입력할 수 있는 창이 나오고, 제목과 내용을 입력할 수 있습니다.
 
 ## 위키 디테일 모달 
-  <img width="642" alt="image" src="https://github.com/Jaehyuksssss/wiki-wiki/blob/master/public/Images/ADDMODAL.png?raw=true">
+  <img width="642" alt="image" src="https://github.com/Jaehyuksssss/wiki-wiki/blob/master/public/Images/DetailModal.png?raw=true">
 
 - 위키페이지는 제목과 본문으로 구성되며 각각 텍스트입니다.
 - 위키페이지 제목을 클릭하면 제목과 본문을 볼 수 있습니다.
