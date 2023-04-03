@@ -9,11 +9,11 @@ export const openDetailModal = atom({
   key: 'DetailModal',
   default: false,
 })
-export const lectureList = atom< Partial<createLectureItem>[]>({
+export const lectureList = atom<Partial<createLectureItem>[]>({
   key: 'lectureList',
   default: [],
 })
-export const lectureSelected= atom({
+export const lectureSelected = atom({
   key: 'lectureListNumber',
   default: 0,
 })
@@ -23,8 +23,7 @@ export const parseLectureData = atom<Partial<LectureDetail>>({
   default: {},
 })
 
-export const paginatedList = atom< Partial<createLectureItem>[]>({
+export const paginatedList = atom<Partial<createLectureItem>[]>({
   key: 'paginatedList',
   default: [],
 })
-

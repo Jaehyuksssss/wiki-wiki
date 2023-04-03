@@ -1,26 +1,39 @@
 export interface LectureItem {
-    id: string;
-    title: string;
-    period: string;
-    price: number;
-    date: string;
-    content: string;
-    createdAt:string;
-    updatedAt:string;
+  id: string
+  title: string
+  period: string
+  price: number
+  date: string
+  content: string
+  createdAt: string
+  updatedAt: string
 }
 export interface LectureDetail {
-    items: LectureItem[];
-  }
+  items: LectureItem[]
+}
 
 export interface createLectureItem {
-    id: string;
-    title: string;
-    content: string,
-    period: number;
-    price: number;
-    currency_code: string,
+  id: string
+  title: string
+  content: string
+  period: number
+  price: number
+  currency_code: string
 }
 
 export interface createLectureItemParams {
-    items: createLectureItem[];
+  items: createLectureItem[]
+}
+export interface Lecture {
+  id: string
+  title: string
+  price: number
+  date: string
+  content: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface GetLecturesResult {
+  getLectures: Lecture[]
 }
